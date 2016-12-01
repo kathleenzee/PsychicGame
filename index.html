@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<h2>Psychic Game-Psychic Knows What You Are Thinking!!!</h2>
+<h3>Press any key to start.</h3>
+    <div id="game">
+    
+
+    </div>
+    <script type="text/javascript">
+    // 1. computer picks random letter
+    // 2. user picks letter
+    // 3. checks if user's pick matches computer's pick
+    // 4. log result 
+    var options = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    var wins = 0;
+    var losses = 0;
+    var guesses = 0;
+    var lives = 10;
+    var display = document.querySelector("#game");
+    function displayResults(){
+    var string = '<p>Wins: ' + wins; + '</p>';
+    string += '<p>Losses: ' + losses; + '</p>';
+    string += '<p>Guesses Left: ' + lives; + '</p>';
+    string += '<p>Your Guesses: ' + guesses; + '</p>';
+    display.innerHTML = string;
+  }
+    document.onkeyup = function(event){
+        var key = event.key;
+        function resetGame() {
+            guesses = 0;
+            lives = 10;
+        }
+        // var computerChoice = 'p';
+        var computerChoice = options[Math.floor(Math.random() * options.length)];
+        if (guesses < 10) {
+            if (key === computerChoice) {
+                    alert("You win, the computer is not feeling Psychic right now!");
+                    wins++;
+                    guesses++;
+                    displayResults();
+                    resetGame();
+            }
+            else {
+                lives--;
+                guesses++;
+                displayResults();
+            }
+        }
+        else {
+            alert("Computer wins, you lose! Sorry");
+            losses++;
+            resetGame();
+        }
+    }
+        
+    </script>
+
+
+</body>
+</html>
